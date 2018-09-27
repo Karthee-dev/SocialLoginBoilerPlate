@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LoginBoilerCode.iml" filepath="$PROJECT_DIR$/LoginBoilerCode.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/refmodule/refmodule.iml" filepath="$PROJECT_DIR$/refmodule/refmodule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/login/login.iml" filepath="$PROJECT_DIR$/login/login.iml" />
     </modules>
   </component>
 </project>

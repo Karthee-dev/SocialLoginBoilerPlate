@@ -17,8 +17,8 @@ class MainActivity : AppCompatActivity() {
 
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.viewModel = LoginViewModel();
-        binding.executePendingBindings();
+        binding.viewModel = LoginViewModel()
+        binding.executePendingBindings()
 
     }
     companion object {

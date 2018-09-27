@@ -17,8 +17,9 @@ class LoginViewModel : BaseObservable() {
     private val successMessage = "Login was successful"
     private val errorMessage = "Email or Password not valid"
 
+    var toastMessage = ObservableField<String>()
 
-    var toastMessage = ObservableField("test")
+//    var toastMessage = ObservableField("test")
 
 
     init {
