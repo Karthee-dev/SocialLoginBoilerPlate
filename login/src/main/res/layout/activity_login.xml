@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.LoginActivity">
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.LoginActivity">
 
     <data>
-        <variable name="viewModel" type="karthee.login.viewmodel.LoginViewModel"/>
+
+        <variable
+            name="viewModel"
+            type="karthee.login.viewmodel.LoginViewModel"/>
     </data>
 
     <LinearLayout
@@ -13,7 +15,7 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-   >
+        >
 
         <!-- Login progress -->
         <ProgressBar
@@ -22,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <ScrollView
             android:id="@+id/login_form"
@@ -35,37 +37,27 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
+
+                <EditText
+                    android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:hint="@string/prompt_username"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:text="@={viewModel.email}"/>
 
-                    <EditText
-                        android:id="@+id/edt_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/prompt_username"
-                        android:inputType="textEmailAddress"
-                        android:text="@={viewModel.email}"
-                        android:maxLines="1"/>
 
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
+                <EditText
+                    android:id="@+id/edt_password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_password"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:text="@={viewModel.password}"/>
 
-                    <EditText
-                        android:id="@+id/edt_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/prompt_password"
-                        android:imeOptions="actionUnspecified"
-                        android:inputType="textPassword"
-                        android:text="@={viewModel.password}"
-                        android:maxLines="1"/>
-
-                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/btn_login"
