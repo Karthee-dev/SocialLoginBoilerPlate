@@ -1,7 +1,7 @@
 package karthee.login.db.remote;
 
-import android.database.Observable;
 
+import io.reactivex.Observable;
 import karthee.login.model.LoginRequest;
 import karthee.login.model.LoginResponse;
 import retrofit2.http.Body;

@@ -17,6 +17,7 @@ public class NetworkUtils {
                 .baseUrl(BASE_URL)
                 .client(new OkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create())
+
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
