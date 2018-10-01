@@ -43,7 +43,7 @@ public class LoginViewModel extends ViewModel {
     public boolean validateInputs() {
         boolean isValid = true;
 
-        if (email.get() == null || !EmailUtils.isEmailValid(email.get())) {
+        if (email.get() == null || !EmailUtils.INSTANCE.isEmailValid(email.get())) {
 
             errorEmail.set("Invalid Email");
 
