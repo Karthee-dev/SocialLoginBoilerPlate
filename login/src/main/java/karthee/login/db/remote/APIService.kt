@@ -9,11 +9,11 @@ import retrofit2.http.POST
 
 
 interface APIService {
-    @POST("Signin")   // mocked login service
+    @POST("Signin")
     fun login(@Body request: LoginRequest): Observable<User>
 
     companion object {
 
-        val BASE_URL = "http://52.90.34.153:92/"    // mocked login service
+        val BASE_URL = "http://52.90.34.153:92/"
     }
 }
