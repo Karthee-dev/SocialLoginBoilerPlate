@@ -12,6 +12,7 @@ import android.widget.Toast;
 import karthee.login.R;
 import karthee.login.databinding.ActivityLoginBinding;
 import karthee.login.viewmodel.LoginViewModel;
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -50,10 +51,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
         binding.btnLogin.setOnClickListener(
-            (View view) -> {
-                mViewModel.onBtnLoginClick();
+                (View view) -> {
+                    mViewModel.onBtnLoginClick();
 
-            });
+                });
     }
 
 

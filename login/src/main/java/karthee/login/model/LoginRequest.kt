@@ -1,11 +1,11 @@
 package karthee.login.model
 
 class LoginRequest(username: String, password: String) {
-    var email = String()
+    var username = String()
     var password = String()
 
     init {
-        this.email = username
+        this.username = username
         this.password = password
     }
 }

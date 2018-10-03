@@ -2,19 +2,19 @@ package karthee.login.db.local
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
-import karthee.login.model.LoginResponse
+import karthee.login.model.User
 
 @Dao
 interface UserDao {
 
     @get:Query("SELECT * FROM user LIMIT 1")
-    val user: LiveData<LoginResponse.User>
+    val user: LiveData<User>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: LoginResponse.User)
+    fun insert(user: User)
 
     @Delete
-    fun delete(user: LoginResponse.User)
+    fun delete(user: User)
 
     @Query("DELETE FROM user")
     fun deleteAll()

@@ -1,11 +1,12 @@
 package karthee.login.db
 
 import android.arch.lifecycle.LiveData
+import android.util.Log
 import karthee.login.MApplication
 import karthee.login.db.local.AppDatabase
 import karthee.login.db.local.UserDao
 import karthee.login.model.LoginRequest
-import karthee.login.model.LoginResponse
+import karthee.login.model.User
 import karthee.login.utils.NetworkUtils
 import karthee.login.utils.RxUtils
 import java.util.concurrent.Executor
@@ -16,7 +17,7 @@ class UserRepository {
     internal var userDao: UserDao
     internal var executor: Executor
 
-    val user: LiveData<LoginResponse.User>
+    val user: LiveData<User>
         get() = userDao.user
 
     init {
@@ -36,8 +37,16 @@ class UserRepository {
         NetworkUtils.getAPIService().login(request)
                 .compose(RxUtils.applySchedulers())
                 .subscribe(
-                        { response: LoginResponse -> executor.execute { userDao.insert(response.user!!) } },
-                        { e: Throwable -> e.printStackTrace() }
+                        { response: User ->
+                            executor.execute {
+                                Log.e("api", response?.name.toString())
+                                userDao.insert(response!!)
+                            }
+                        },
+                        { e: Throwable ->
+                            e.printStackTrace()
+                            Log.e("api", e.toString())
+                        }
                 )
     }
 }

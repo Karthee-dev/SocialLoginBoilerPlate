@@ -4,10 +4,9 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import karthee.login.model.User
 
-import karthee.login.model.LoginResponse
-
-@Database(entities = arrayOf(LoginResponse.User::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(User::class), version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao

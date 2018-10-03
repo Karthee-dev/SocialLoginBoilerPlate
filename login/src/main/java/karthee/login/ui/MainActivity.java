@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         mViewModel.getUser().observe(this, userResponse -> {
 
             if (userResponse != null) {
-                binding.txtWelcome.setText("Welcome " + userResponse.getFirstName() + " " + userResponse.getLastName()
-                        + "\n\n" + "You are more than a " + userResponse.getJobTitle());
+                binding.txtWelcome.setText("Welcome " + userResponse.getName() + " " + userResponse.getRole()
+                        + "\n\n" + "You are more than a " + userResponse.getUserguid());
 
             } else {
                 logoutUser();
