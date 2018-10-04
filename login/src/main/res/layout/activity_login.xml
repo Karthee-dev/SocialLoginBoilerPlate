@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="karthee.login.viewmodel.LoginViewModel"/>
+            type="arivista.login.viewmodel.LoginViewModel"/>
     </data>
 
     <LinearLayout
