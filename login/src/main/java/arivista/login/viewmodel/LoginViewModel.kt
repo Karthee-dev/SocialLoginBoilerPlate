@@ -1,6 +1,7 @@
 package arivista.login.viewmodel
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import arivista.login.db.remote.UserRepository
@@ -15,26 +16,45 @@ class LoginViewModel : ViewModel() {
     val email = ObservableField<String>()
     val password = ObservableField<String>()
 
-    private val errorEmail = ObservableField<String>()
-    private val errorPassword = ObservableField<String>()
+    val errorEmail = ObservableField<String>()
+    val errorPassword = ObservableField<String>()
 
-    internal var userRepository: UserRepository = UserRepository()
+    private var userRepository: UserRepository = UserRepository()
 
     init {
         email.set("admin@gmail.com")
         password.set("admin")
 
         user = userRepository.user
+
+    }
+
+    private lateinit var users: MutableLiveData<List<User>>
+
+    fun getUsers(): LiveData<List<User>> {
+        if (!::users.isInitialized) {
+            users = MutableLiveData()
+            loadUsers()
+        }
+        return users
+    }
+
+    private fun loadUsers() {
+        user.value.apply { this!!.name
+
+        }
+        // Do an asynchronous operation to fetch users.
     }
 
     fun onBtnLoginClick() {
         if (validateInputs()) {
             userRepository.loginUser(email.get()!!, password.get()!!)
+
         }
     }
 
 
-    fun validateInputs(): Boolean {
+    private fun validateInputs(): Boolean {
         var isValid = true
 
         if (email.get() == null || !EmailUtils.isEmailValid(email.get()!!)) {
@@ -44,7 +64,7 @@ class LoginViewModel : ViewModel() {
             isValid = false
 
         } else {
-            errorEmail.set(null)
+            errorEmail.set("")
         }
 
         if (password.get() == null || password.get()!!.length < 4) {
@@ -53,7 +73,7 @@ class LoginViewModel : ViewModel() {
             isValid = false
 
         } else {
-            errorPassword.set(null)
+            errorPassword.set("")
         }
 
         return isValid

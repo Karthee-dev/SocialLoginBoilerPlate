@@ -4,7 +4,6 @@
         tools:context=".ui.LoginActivity">
 
     <data>
-
         <variable
             name="viewModel"
             type="arivista.login.viewmodel.LoginViewModel"/>
@@ -46,18 +45,23 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:text="@={viewModel.email}"/>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/prompt_username"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:text="@={viewModel.errorEmail}"/>
 
                 <EditText
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_password"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
                     android:text="@={viewModel.password}"/>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.errorPassword}"/>
 
                 <Button
                     android:id="@+id/btn_login"

@@ -15,11 +15,13 @@ import java.util.concurrent.Executors
 
 
 class UserRepository {
-    internal var userDao: UserDao = AppDatabase.getAppDatabase(MApplication.context).userDao()
-    internal var executor: Executor = Executors.newSingleThreadExecutor()
+    private var userDao: UserDao = AppDatabase.getAppDatabase(MApplication.context).userDao()
+    private var executor: Executor = Executors.newSingleThreadExecutor()
 
     val user: LiveData<User>
         get() = userDao.user
+
+
 
     fun clearUserCached() {
         executor.execute { userDao.deleteAll() }

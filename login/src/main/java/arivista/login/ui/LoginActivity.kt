@@ -1,6 +1,6 @@
 package arivista.login.ui
 
-import android.arch.lifecycle.LiveData
+
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -12,10 +12,8 @@ import android.view.View
 import android.widget.Toast
 import arivista.login.R
 import arivista.login.databinding.ActivityLoginBinding
-
-
-import arivista.login.model.User
 import arivista.login.viewmodel.LoginViewModel
+import com.google.gson.Gson
 
 /**
  * A login screen that offers login via email/password.
@@ -37,11 +35,11 @@ class LoginActivity : AppCompatActivity() {
         binding.viewModel = mViewModel
 
 
-
-
-        //        // The observer updates the UI when Login Operation is successful
-        mViewModel!!.user.observe(this, Observer{ user ->
+        // The observer updates the UI when Login Operation is successful
+        mViewModel!!.user.observe(this, Observer { user ->
             if (user != null) {
+                Log.e("LoginActivity", Gson().toJson(user))
+
                 Toast.makeText(this@LoginActivity, "Login success", Toast.LENGTH_SHORT).show()
 
                 val intent = Intent(this, MainActivity::class.java)
@@ -64,7 +62,4 @@ class LoginActivity : AppCompatActivity() {
 
 }
 
-private fun <T> LiveData<T>.observe(loginActivity: LoginActivity, observer: Observer<User>) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-}
 
