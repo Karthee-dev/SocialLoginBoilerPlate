@@ -51,15 +51,11 @@ class LoginActivity : AppCompatActivity() {
                 // Show ERROR
             }
         })
-
-
         binding.btnLogin.setOnClickListener { view: View ->
             mViewModel!!.onBtnLoginClick()
 
         }
     }
-
-
 }
 
 
