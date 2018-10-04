@@ -10,6 +10,9 @@ interface UserDao {
     @get:Query("SELECT * FROM user LIMIT 1")
     val user: LiveData<User>
 
+    @get:Query("SELECT * FROM user")
+    val userlist: LiveData<List<User>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(user: User)
 

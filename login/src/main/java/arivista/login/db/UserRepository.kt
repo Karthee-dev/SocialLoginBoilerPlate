@@ -21,7 +21,8 @@ class UserRepository {
     val user: LiveData<User>
         get() = userDao.user
 
-
+    val userlist: LiveData<List<User>>
+        get() = userDao.userlist
 
     fun clearUserCached() {
         executor.execute { userDao.deleteAll() }

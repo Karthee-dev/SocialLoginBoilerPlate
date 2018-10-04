@@ -6,13 +6,10 @@ import android.support.annotation.NonNull
 
 @Entity
 class User {
-
     @PrimaryKey
     @NonNull
     var userguid: String? = null
-
     var name: String? = null
     var role: String? = null
     var accesstoken: String? = null
-
 }
