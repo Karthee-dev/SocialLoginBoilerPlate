@@ -4,6 +4,7 @@
         tools:context=".ui.LoginActivity">
 
     <data>
+
         <variable
             name="viewModel"
             type="arivista.login.viewmodel.LoginViewModel"/>
@@ -45,6 +46,7 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:text="@={viewModel.email}"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -58,6 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={viewModel.password}"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,6 +74,14 @@
                     android:layout_marginTop="16dp"
                     android:text="Sign Im"
                     android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:text="Register"/>
 
             </LinearLayout>
         </ScrollView>
