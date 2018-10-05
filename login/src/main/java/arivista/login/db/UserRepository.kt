@@ -1,21 +1,21 @@
 package arivista.login.db.remote
 
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
-import android.util.Log
 import arivista.login.MApplication
+import arivista.login.db.InsertAsyncTask
 import arivista.login.db.local.AppDatabase
 import arivista.login.db.local.UserDao
 import arivista.login.model.LoginRequest
 import arivista.login.model.User
-import arivista.login.utils.NetworkUtils
-import arivista.login.utils.RxUtils
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 
 class UserRepository {
-    private var userDao: UserDao = AppDatabase.getAppDatabase(MApplication.context).userDao()
+    var appDatabase = AppDatabase.getAppDatabase(MApplication.context)
+    private var userDao: UserDao = appDatabase.userDao()
     private var executor: Executor = Executors.newSingleThreadExecutor()
 
     val user: LiveData<User>
@@ -28,25 +28,23 @@ class UserRepository {
         executor.execute { userDao.deleteAll() }
     }
 
+    @SuppressLint("CheckResult")
     fun loginUser(email: String, password: String) {
 
 
         val request = LoginRequest(email, password)
 
-        NetworkUtils.getAPIService().login(request)
-                .compose(RxUtils.applySchedulers())
-                .subscribe(
-                        { response: User ->
-                            executor.execute {
-                                Log.e("api", response?.name.toString())
-                                userDao.insert(response!!)
-                            }
-                        },
-                        { e: Throwable ->
-                            e.printStackTrace()
-                            Log.e("api", e.toString())
-                        }
-                )
+        var user1 = User()
+        user1.name = email
+        user1.accesstoken= "asdasd"
+        user1.role="admin"
+        user1.userguid="sadaasd"
+//                    db.userDao().insert(user1)
+
+        InsertAsyncTask(userDao).execute(user1)
+
+
+
     }
 }
 

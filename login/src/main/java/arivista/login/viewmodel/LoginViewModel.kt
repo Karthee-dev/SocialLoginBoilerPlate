@@ -28,7 +28,7 @@ class LoginViewModel : ViewModel() {
         user = userRepository.user
 
         var size = arrayOf(getUsers()).size
-        Log.e("usersize",size.toString())
+        Log.e("usersize", size.toString())
 
     }
 
@@ -41,15 +41,17 @@ class LoginViewModel : ViewModel() {
 
     private fun loadUsers() {
         users = userRepository.userlist
-        // Do an asynchronous operation to fetch users.
     }
 
-    fun onBtnLoginClick() {
+    fun onBtnLoginClick(): Boolean {
+
         if (validateInputs()) {
             userRepository.loginUser(email.get()!!, password.get()!!)
-
         }
+        return validateInputs()
+
     }
+
     private fun validateInputs(): Boolean {
         var isValid = true
 
