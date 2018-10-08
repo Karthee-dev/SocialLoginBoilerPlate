@@ -8,7 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import arivista.login.R
-import arivista.login.databinding.ActivityLoginBinding
+import arivista.login.databinding.RegisterFragmentBinding
+import arivista.login.viewmodel.RegisterViewModel
 
 class RegisterFragment : Fragment() {
 
@@ -21,12 +22,10 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        val binding = DataBindingUtil.setContentView<ActivityLoginBinding>(activity, R.layout.register_fragment)
+        var binding: RegisterFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.register_fragment, container, false)
+        var myView: View = binding.root
 
-
-        return inflater.inflate(R.layout.register_fragment, container, false)
-
-
+        return myView
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -37,6 +37,13 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
+        binding.register.setOnClickListener {
+            if (mViewModel!!.onBtnLoginClick()) {
+                val intent = Intent(this, RegisterActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 }
 

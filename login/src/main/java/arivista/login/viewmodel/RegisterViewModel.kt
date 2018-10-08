@@ -1,4 +1,4 @@
-package arivista.login.ui.ui.register
+package arivista.login.viewmodel
 
 import android.arch.lifecycle.ViewModel
 
