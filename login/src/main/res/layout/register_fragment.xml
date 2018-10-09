@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:hint="House / Flat Number"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/streetname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

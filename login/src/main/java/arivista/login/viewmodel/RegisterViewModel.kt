@@ -18,6 +18,7 @@ class RegisterViewModel : ViewModel() {
     val village = ObservableField<String>()
     val taluk = ObservableField<String>()
     val street = ObservableField<String>()
+    val streetlist = ObservableField<List<String>>()
 
 
     init {
@@ -44,6 +45,7 @@ class RegisterViewModel : ViewModel() {
 
             userRepository.getStreet(pincode.get().toString(), street).observeForever {
 
+                streetlist.set(it)
                 Log.e("api", it?.toString())
             }
         }
