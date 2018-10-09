@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Enter Pincode"
-            android:text="@{viewModel.pincode}"
+            android:text="@={viewModel.pincode}"
             />
 
         <EditText

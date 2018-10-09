@@ -13,8 +13,10 @@ import arivista.login.model.AddressModel
 import arivista.login.model.LoginRequest
 import arivista.login.model.User
 import arivista.login.utils.NetworkUtils
+import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import retrofit2.HttpException
 import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
@@ -66,6 +68,30 @@ class UserRepository {
                 }, { error ->
                     error.printStackTrace()
                     Log.e("Result Error", "There are ${error.localizedMessage} ")
+
+                })
+
+        return data
+    }
+
+    fun getStreet(pincode: String, searchString: String): MutableLiveData<List<String>> {
+        var data = MutableLiveData<List<String>>()
+
+
+        NetworkUtils.getAPIService()!!.create(GetStreet::class.java).address(pincode, searchString, "Android_Key")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ result ->
+                    Log.e("Result", "There are ${result.size} ")
+                    data.value = result
+                }, { error ->
+                    error.printStackTrace()
+                    val error = error as HttpException
+                    Log.e("Result Error", "There are ${error.response().raw()} ")
+                    val errorBody = Gson().toJson(error.response().raw())
+                    Log.e("Result Error", "There are ${errorBody} ")
+                    Log.e("Result Error", " ${error.localizedMessage} ")
+
 
                 })
 

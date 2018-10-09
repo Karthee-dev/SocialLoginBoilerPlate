@@ -1,30 +1,15 @@
 package arivista.login.viewmodel
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.util.Log
-import arivista.login.db.remote.RetrofitLiveData
 import arivista.login.db.remote.UserRepository
-import arivista.login.model.AddressModel
 
 
 class RegisterViewModel : ViewModel() {
 
 
     private var userRepository: UserRepository = UserRepository()
-    private lateinit var address: LiveData<List<AddressModel>>
-
-
-    init {
-
-//        address = userRepository.address
-
-
-    }
-
-
-    var liveData: RetrofitLiveData<AddressModel>? = null
 
 
     val pincode = ObservableField<String>()
@@ -40,7 +25,6 @@ class RegisterViewModel : ViewModel() {
     }
 
     fun getAddress(pincode: String) {
-        Log.e("pincode", pincode)
 
         userRepository.getAddress(pincode).observeForever {
 
@@ -48,12 +32,21 @@ class RegisterViewModel : ViewModel() {
             taluk.set(it?.taluk)
             village.set(it?.villageName.toString())
             district.set(it?.districtName)
-            Log.e("api", it?.stateName.toString())
         }
     }
 
-    override fun onCleared() {
-        liveData?.cancel()
+
+    fun getStreet(street: String) {
+        Log.e("api", "pincode" + pincode.get().toString())
+
+        if (pincode.get() != null) {
+            Log.e("api", "pincode in" + pincode.get().toString())
+
+            userRepository.getStreet(pincode.get().toString(), street).observeForever {
+
+                Log.e("api", it?.toString())
+            }
+        }
     }
 //    fun getPasswordTextWatcher(): TextWatcher {
 //        return object : TextWatcher {
