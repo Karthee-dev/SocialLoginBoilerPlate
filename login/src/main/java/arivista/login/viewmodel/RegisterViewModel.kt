@@ -29,7 +29,10 @@ class RegisterViewModel : ViewModel() {
 
     val pincode = ObservableField<String>()
     val state = ObservableField<String>()
-
+    val district = ObservableField<String>()
+    val village = ObservableField<String>()
+    val taluk = ObservableField<String>()
+    val street = ObservableField<String>()
 
 
     init {
@@ -42,7 +45,10 @@ class RegisterViewModel : ViewModel() {
         userRepository.getAddress(pincode).observeForever {
 
             state.set(it?.stateName)
-            Log.e("api",it?.stateName.toString())
+            taluk.set(it?.taluk)
+            village.set(it?.villageName.toString())
+            district.set(it?.districtName)
+            Log.e("api", it?.stateName.toString())
         }
     }
 

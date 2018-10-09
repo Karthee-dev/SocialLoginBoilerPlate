@@ -35,31 +35,36 @@
             android:id="@+id/streetname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Street Name"/>
+            android:hint="Street Name"
+            android:text="@{viewModel.street}"/>
 
         <EditText
             android:id="@+id/village"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Select Village"/>
+            android:hint="Select Village"
+            android:text="@{viewModel.village}"/>
 
         <EditText
             android:id="@+id/taluk"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Taluk"/>
+            android:hint="Taluk"
+            android:text="@{viewModel.taluk}"/>
 
         <EditText
             android:id="@+id/district"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="District"/>
+            android:hint="District"
+            android:text="@{viewModel.district}"/>
 
         <EditText
             android:id="@+id/state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="State"/>
+            android:hint="State"
+            android:text="@{viewModel.state}"/>
 
         <Button
             android:id="@+id/submit"
