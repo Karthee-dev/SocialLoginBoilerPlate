@@ -1,31 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".ui.RegisterActivity">
 
     <data>
+
 
         <variable
             name="viewModel"
             type="arivista.login.viewmodel.RegisterViewModel"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:id="@+id/register"
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/pincode"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RegisterFragment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:hint="Enter Pincode"
+            android:text="@{viewModel.pincode}"
+            />
 
-    </android.support.constraint.ConstraintLayout>
+        <EditText
+            android:id="@+id/homenum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="House / Flat Number"/>
+
+        <EditText
+            android:id="@+id/streetname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Street Name"/>
+
+        <EditText
+            android:id="@+id/village"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Village"/>
+
+        <EditText
+            android:id="@+id/taluk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Taluk"/>
+
+        <EditText
+            android:id="@+id/district"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="District"/>
+
+        <EditText
+            android:id="@+id/state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="State"/>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"/>
+
+    </LinearLayout>
 </layout>
