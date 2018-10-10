@@ -9,6 +9,7 @@ import arivista.login.MApplication
 import arivista.login.db.InsertAsyncTask
 import arivista.login.db.local.AppDatabase
 import arivista.login.db.local.UserDao
+import arivista.login.model.AddressData
 import arivista.login.model.AddressModel
 import arivista.login.model.LoginRequest
 import arivista.login.model.User
@@ -55,6 +56,7 @@ class UserRepository {
 
     }
 
+    @SuppressLint("CheckResult")
     fun getAddress(pincode: String): MutableLiveData<AddressModel> {
         var data = MutableLiveData<AddressModel>()
 
@@ -74,6 +76,7 @@ class UserRepository {
         return data
     }
 
+    @SuppressLint("CheckResult")
     fun getStreet(pincode: String, searchString: String): MutableLiveData<List<String>> {
         var data = MutableLiveData<List<String>>()
 
@@ -99,5 +102,33 @@ class UserRepository {
     }
 
 
+    @SuppressLint("CheckResult")
+    fun postAddress(address: String): Boolean {
+        var isSuccess: Boolean = false
+
+        var addressData: AddressData = AddressData()
+        addressData.address = address
+
+        var subscribe = NetworkUtils.getAPIService()!!.create(PostAddress::class.java).address(addressData, "Android_Key")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ result ->
+                    Log.e("Result", "There are ${result.desc} ")
+                    isSuccess = true
+                }, { error ->
+                    error.printStackTrace()
+                    val error = error as HttpException
+                    Log.e("Result Error", "There are ${error.response().raw()} ")
+                    val errorBody = Gson().toJson(error.response().raw())
+                    Log.e("Result Error", "There are ${errorBody} ")
+                    Log.e("Result Error", " ${error.localizedMessage} ")
+                    isSuccess = false
+
+                })
+
+        return isSuccess
+    }
 }
+
+
 

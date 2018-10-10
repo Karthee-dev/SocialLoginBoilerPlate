@@ -59,9 +59,8 @@ class RegisterFragment : Fragment() {
                                        before: Int, count: Int) {
                 try {
                     var pincode = s.toString()
-
-
-                    viewModel.getAddress(pincode)
+                    if (pincode.length == 6)
+                        viewModel.getAddress(pincode)
                 } catch (e: Exception) {
                 }
             }
@@ -92,32 +91,34 @@ class RegisterFragment : Fragment() {
 
 
         // Set an item click listener for auto complete text view
-        binding.streetname.onItemClickListener = AdapterView.OnItemClickListener{
-            parent,view,position,id->
+        binding.streetname.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedItem = parent.getItemAtPosition(position).toString()
             // Display the clicked item using toast
-            Toast.makeText(context,"Selected : $selectedItem",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Selected : $selectedItem", Toast.LENGTH_SHORT).show()
         }
 
 
         // Set a dismiss listener for auto complete text view
         binding.streetname.setOnDismissListener {
-            Toast.makeText(context,"Suggestion closed.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Suggestion closed.", Toast.LENGTH_SHORT).show()
         }
 
 
-
-
-
         // Set a focus change listener for auto complete text view
-        binding.streetname.onFocusChangeListener = View.OnFocusChangeListener{
-            view, b ->
-            if(b){
+        binding.streetname.onFocusChangeListener = View.OnFocusChangeListener { view, b ->
+            if (b) {
                 // Display the suggestion dropdown on focus
                 binding.streetname.showDropDown()
             }
         }
 
+
+        binding.submit.setOnClickListener {
+            if (viewModel.postAddress()) {
+
+                activity!!.finish()
+            }
+        }
 
         binding.streetname.addTextChangedListener(object : TextWatcher {
 
@@ -131,10 +132,9 @@ class RegisterFragment : Fragment() {
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
                 try {
-                    var pincode = s.toString()
 
-
-                    viewModel.getStreet(s.toString())
+                    if (s.length == 1)
+                        viewModel.getStreet(s.toString())
                 } catch (e: Exception) {
                 }
             }

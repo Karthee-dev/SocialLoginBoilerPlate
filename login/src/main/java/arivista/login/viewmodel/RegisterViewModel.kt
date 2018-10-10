@@ -19,6 +19,7 @@ class RegisterViewModel : ViewModel() {
     val village = ObservableField<String>()
     val taluk = ObservableField<String>()
     val street = ObservableField<String>()
+    val houseno = ObservableField<String>()
 
     val streetlist: MutableLiveData<List<String>> = MutableLiveData()
 
@@ -53,20 +54,14 @@ class RegisterViewModel : ViewModel() {
             }
         }
     }
-//    fun getPasswordTextWatcher(): TextWatcher {
-//        return object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-//                // Do nothing.
-//            }
-//
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//                Log.e("pincode", s.toString())
-//            }
-//
-//            override fun afterTextChanged(s: Editable) {
-//                // Do nothing.
-//            }
-//        }
-//    }
+
+    fun postAddress(): Boolean {
+
+        var address = pincode.get() + "," + houseno.get() + "," + taluk.get() + "," + village.get() + "," +
+                district.get() + "," + state.get() + "," + street.get()
+        Log.e("request", address)
+       return userRepository.postAddress(address)
+    }
+
 
 }
