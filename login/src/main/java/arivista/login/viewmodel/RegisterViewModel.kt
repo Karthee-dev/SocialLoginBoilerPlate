@@ -1,5 +1,6 @@
 package arivista.login.viewmodel
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.util.Log
@@ -18,11 +19,13 @@ class RegisterViewModel : ViewModel() {
     val village = ObservableField<String>()
     val taluk = ObservableField<String>()
     val street = ObservableField<String>()
-    val streetlist = ObservableField<List<String>>()
+
+    val streetlist: MutableLiveData<List<String>> = MutableLiveData()
 
 
     init {
 
+//        streetlist.set(EMPTY_LIST)
     }
 
     fun getAddress(pincode: String) {
@@ -45,7 +48,7 @@ class RegisterViewModel : ViewModel() {
 
             userRepository.getStreet(pincode.get().toString(), street).observeForever {
 
-                streetlist.set(it)
+                streetlist.value = (it)
                 Log.e("api", it?.toString())
             }
         }

@@ -9,6 +9,9 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import arivista.login.R
 import arivista.login.databinding.RegisterFragmentBinding
 import arivista.login.viewmodel.RegisterViewModel
@@ -63,6 +66,58 @@ class RegisterFragment : Fragment() {
                 }
             }
         })
+
+
+
+
+        viewModel.streetlist.observeForever { it ->
+            // Initialize a new array with elements
+            // Initialize a new array adapter object
+            val adapter = ArrayAdapter<String>(
+                    activity, // Context
+                    android.R.layout.simple_dropdown_item_1line, // Layout
+                    it // Array
+            )
+
+
+            // Set the AutoCompleteTextView adapter
+            binding.streetname.setAdapter(adapter)
+
+        }
+
+
+        // Auto complete threshold
+        // The minimum number of characters to type to show the drop down
+        binding.streetname.threshold = 1
+
+
+        // Set an item click listener for auto complete text view
+        binding.streetname.onItemClickListener = AdapterView.OnItemClickListener{
+            parent,view,position,id->
+            val selectedItem = parent.getItemAtPosition(position).toString()
+            // Display the clicked item using toast
+            Toast.makeText(context,"Selected : $selectedItem",Toast.LENGTH_SHORT).show()
+        }
+
+
+        // Set a dismiss listener for auto complete text view
+        binding.streetname.setOnDismissListener {
+            Toast.makeText(context,"Suggestion closed.",Toast.LENGTH_SHORT).show()
+        }
+
+
+
+
+
+        // Set a focus change listener for auto complete text view
+        binding.streetname.onFocusChangeListener = View.OnFocusChangeListener{
+            view, b ->
+            if(b){
+                // Display the suggestion dropdown on focus
+                binding.streetname.showDropDown()
+            }
+        }
+
 
         binding.streetname.addTextChangedListener(object : TextWatcher {
 
