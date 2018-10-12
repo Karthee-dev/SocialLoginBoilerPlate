@@ -16,6 +16,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter email id"
+            android:text="@={viewModel.email}"
+            />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Password"
+            android:text="@={viewModel.password}"
+            />
+
         <EditText
             android:id="@+id/pincode"
             android:layout_width="match_parent"
@@ -38,12 +55,12 @@
             android:hint="Street Name"
             android:text="@={viewModel.street}"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/village"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Select Village"
-            android:text="@{viewModel.village}"/>
+            android:text="@={viewModel.village}"/>
 
         <EditText
             android:id="@+id/taluk"

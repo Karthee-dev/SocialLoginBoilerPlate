@@ -16,5 +16,4 @@ class RegisterActivity : AppCompatActivity() {
                     .commitNow()
         }
     }
-
 }

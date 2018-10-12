@@ -1,55 +1,30 @@
 package arivista.login.viewmodel
 
-import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.util.Log
 import arivista.login.db.remote.UserRepository
-import arivista.login.model.User
 import arivista.login.utils.EmailUtils
 
 class LoginViewModel : ViewModel() {
 
-    // Create a LiveData
-    val user: LiveData<User>
+    val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
 
     val email = ObservableField<String>()
     val password = ObservableField<String>()
-
     val errorEmail = ObservableField<String>()
     val errorPassword = ObservableField<String>()
 
     private var userRepository: UserRepository = UserRepository()
-    private lateinit var users: LiveData<List<User>>
 
-    init {
-        email.set("admin@gmail.com")
-        password.set("admin")
-        user = userRepository.user
-
-        var size = arrayOf(getUsers()).size
-        Log.e("usersize", size.toString())
-
-    }
-
-    fun getUsers(): LiveData<List<User>> {
-        if (!::users.isInitialized) {
-            loadUsers()
-        }
-        return users
-    }
-
-    private fun loadUsers() {
-        users = userRepository.userlist
-    }
-
-    fun onBtnLoginClick(): Boolean {
-
+    fun onBtnLoginClick() {
         if (validateInputs()) {
-            userRepository.loginUser(email.get()!!, password.get()!!)
+            userRepository.addressDao.getUser(email.get()!!, password.get()!!).observeForever {
+                Log.e("login success", it?.email!! + "," + it?.password!!)
+                isSuccess.value = true
+            }
         }
-        return validateInputs()
-
     }
 
     private fun validateInputs(): Boolean {

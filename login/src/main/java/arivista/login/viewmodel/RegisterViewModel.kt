@@ -9,11 +9,11 @@ import arivista.login.db.remote.UserRepository
 
 class RegisterViewModel : ViewModel() {
 
-
     private var userRepository: UserRepository = UserRepository()
 
-
     val pincode = ObservableField<String>()
+    val email = ObservableField<String>()
+    val password = ObservableField<String>()
     val state = ObservableField<String>()
     val district = ObservableField<String>()
     val village = ObservableField<String>()
@@ -22,12 +22,8 @@ class RegisterViewModel : ViewModel() {
     val houseno = ObservableField<String>()
 
     val streetlist: MutableLiveData<List<String>> = MutableLiveData()
-
-
-    init {
-
-//        streetlist.set(EMPTY_LIST)
-    }
+    val villagelist: MutableLiveData<List<String>> = MutableLiveData()
+    val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getAddress(pincode: String) {
 
@@ -35,11 +31,11 @@ class RegisterViewModel : ViewModel() {
 
             state.set(it?.stateName)
             taluk.set(it?.taluk)
-            village.set(it?.villageName.toString())
+            Log.e("village", it?.villageName.toString())
+            villagelist.value = it?.villageName
             district.set(it?.districtName)
         }
     }
-
 
     fun getStreet(street: String) {
         Log.e("api", "pincode" + pincode.get().toString())
@@ -55,12 +51,13 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    fun postAddress(): Boolean {
+    fun postAddress() {
+        userRepository.postAddress(pincode.get()!!, houseno.get(), taluk.get(),
+                village.get(), district.get(), state.get(), street.get()
+                , email.get(), password.get()).observeForever {
 
-        var address = pincode.get() + "," + houseno.get() + "," + taluk.get() + "," + village.get() + "," +
-                district.get() + "," + state.get() + "," + street.get()
-        Log.e("request", address)
-       return userRepository.postAddress(address)
+            isSuccess.value = it
+        }
     }
 
 
