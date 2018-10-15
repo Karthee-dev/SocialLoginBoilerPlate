@@ -3,7 +3,6 @@ package arivista.login.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
-import android.util.Log
 import arivista.login.db.remote.UserRepository
 import arivista.login.utils.EmailUtils
 
@@ -20,9 +19,8 @@ class LoginViewModel : ViewModel() {
 
     fun onBtnLoginClick() {
         if (validateInputs()) {
-            userRepository.addressDao.getUser(email.get()!!, password.get()!!).observeForever {
-                Log.e("login success", it?.email!! + "," + it?.password!!)
-                isSuccess.value = true
+            userRepository.addressDao.isUserExists(email.get()!!, password.get()!!).observeForever { it ->
+                isSuccess.value = it != 0
             }
         }
     }

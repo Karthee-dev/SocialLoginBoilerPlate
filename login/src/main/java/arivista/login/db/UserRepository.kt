@@ -33,9 +33,9 @@ class UserRepository {
     val addressModellist: LiveData<List<AddressModel>>
         get() = addressDao.addressmodellist
 
-    fun clearUserCached() {
-        executor.execute { addressDao.deleteAll() }
-    }
+//    fun clearUserCached() {
+//        executor.execute { addressDao.deleteAll() }
+//    }
 
     @SuppressLint("CheckResult")
     fun loginUser(email: String, password: String): LiveData<AddressModel> {

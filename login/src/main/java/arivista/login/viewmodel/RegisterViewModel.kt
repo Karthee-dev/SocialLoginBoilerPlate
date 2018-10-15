@@ -3,7 +3,6 @@ package arivista.login.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
-import android.util.Log
 import arivista.login.db.remote.UserRepository
 
 
@@ -31,22 +30,16 @@ class RegisterViewModel : ViewModel() {
 
             state.set(it?.stateName)
             taluk.set(it?.taluk)
-            Log.e("village", it?.villageName.toString())
             villagelist.value = it?.villageName
             district.set(it?.districtName)
         }
     }
 
     fun getStreet(street: String) {
-        Log.e("api", "pincode" + pincode.get().toString())
 
         if (pincode.get() != null) {
-            Log.e("api", "pincode in" + pincode.get().toString())
-
             userRepository.getStreet(pincode.get().toString(), street).observeForever {
-
                 streetlist.value = (it)
-                Log.e("api", it?.toString())
             }
         }
     }
@@ -55,7 +48,6 @@ class RegisterViewModel : ViewModel() {
         userRepository.postAddress(pincode.get()!!, houseno.get(), taluk.get(),
                 village.get(), district.get(), state.get(), street.get()
                 , email.get(), password.get()).observeForever {
-
             isSuccess.value = it
         }
     }

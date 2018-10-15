@@ -23,9 +23,9 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun clearUserData() {
-        userRepository.clearUserCached()
-    }
+//    fun clearUserData() {
+//        userRepository.clearUserCached()
+//    }
 
 
 }

@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logoutUser() {
-        mViewModel!!.clearUserData()
+//        mViewModel!!.clearUserData()
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
