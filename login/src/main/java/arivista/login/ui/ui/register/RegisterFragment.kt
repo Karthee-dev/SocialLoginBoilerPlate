@@ -67,8 +67,9 @@ class RegisterFragment : Fragment() {
             }
         })
         binding.streetname.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+            }
 
-            override fun afterTextChanged(s: Editable) {}
 
             override fun beforeTextChanged(s: CharSequence, start: Int,
                                            count: Int, after: Int) {
@@ -78,7 +79,7 @@ class RegisterFragment : Fragment() {
             override fun onTextChanged(s: CharSequence, start: Int,
                                        before: Int, count: Int) {
                 try {
-                    if (s.length == 1)
+                    if (s.length > 1)
                         viewModel.getStreet(s.toString())
                 } catch (e: Exception) {
                 }
@@ -92,11 +93,10 @@ class RegisterFragment : Fragment() {
                     android.R.layout.simple_dropdown_item_1line, // Layout
                     it // Array
             )
-
             // Set the AutoCompleteTextView adapter
             binding.streetname.setAdapter(adapter)
-
         }
+
         viewModel.villagelist.observeForever { it ->
             // Initialize a new array with elements
             // Initialize a new array adapter object
@@ -105,21 +105,22 @@ class RegisterFragment : Fragment() {
                     android.R.layout.simple_dropdown_item_1line, // Layout
                     it // Array
             )
-
-
             // Set the AutoCompleteTextView adapter
             binding.village.setAdapter(adapter)
 
-            binding.village.requestFocus()
-            binding.village.showDropDown()
+            if (it!!.size != 1) {
+                binding.village.requestFocus()
+                binding.village.showDropDown()
+            } else {
+                binding.streetname.requestFocus()
+            }
 
-
-            val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
-            imm!!.showSoftInput(binding.village, InputMethodManager.SHOW_IMPLICIT)
+            val inputMethodManager = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+            inputMethodManager!!.showSoftInput(binding.village, InputMethodManager.SHOW_IMPLICIT)
         }
+
         viewModel.isSuccess.observeForever {
             activity!!.finish()
-
         }
 
         binding.submit.setOnClickListener {

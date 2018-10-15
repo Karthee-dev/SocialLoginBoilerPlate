@@ -7,6 +7,8 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.TextWatcher
 import arivista.login.R
 import arivista.login.databinding.ActivityLoginBinding
 import arivista.login.viewmodel.LoginViewModel
@@ -35,6 +37,9 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
+        binding.edtEmail.addTextChangedListener(TextChange())
+        binding.edtPassword.addTextChangedListener(TextChange())
+
         binding.btnLogin.setOnClickListener {
             mViewModel!!.onBtnLoginClick()
         }
@@ -44,6 +49,26 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    inner class TextChange : TextWatcher {
+        override fun afterTextChanged(p0: Editable?) {
+        }
+
+
+        override fun beforeTextChanged(s: CharSequence, start: Int,
+                                       count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence, start: Int,
+                                   before: Int, count: Int) {
+            try {
+                if (s.length > 1)
+                    mViewModel!!.onEmailChange()
+            } catch (e: Exception) {
+            }
+        }
     }
 }
 

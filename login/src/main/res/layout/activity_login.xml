@@ -4,7 +4,6 @@
         tools:context=".ui.LoginActivity">
 
     <data>
-
         <variable
             name="viewModel"
             type="arivista.login.viewmodel.LoginViewModel"/>
@@ -58,6 +57,7 @@
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Password"
                     android:text="@={viewModel.password}"/>
 
                 <TextView
@@ -71,7 +71,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Sign Im"
+                    android:text="Sign In"
                     android:textStyle="bold"/>
 
                 <TextView

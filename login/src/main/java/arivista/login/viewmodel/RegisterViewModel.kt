@@ -31,14 +31,20 @@ class RegisterViewModel : ViewModel() {
             state.set(it?.stateName)
             taluk.set(it?.taluk)
             villagelist.value = it?.villageName
+
+            if (villagelist.value!!.size == 1) {
+                village.set(villagelist.value!![0])
+            }
+
             district.set(it?.districtName)
         }
     }
 
-    fun getStreet(street: String) {
+    fun getStreet(streetname: String) {
 
         if (pincode.get() != null) {
-            userRepository.getStreet(pincode.get().toString(), street).observeForever {
+            userRepository.getStreet(pincode.get().toString(), streetname).observeForever {
+
                 streetlist.value = (it)
             }
         }

@@ -3,14 +3,16 @@ package arivista.login.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
+import android.util.Log
 import arivista.login.db.remote.UserRepository
 import arivista.login.utils.EmailUtils
+
 
 class LoginViewModel : ViewModel() {
 
     val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
 
-    val email = ObservableField<String>()
+    var email = ObservableField<String>()
     val password = ObservableField<String>()
     val errorEmail = ObservableField<String>()
     val errorPassword = ObservableField<String>()
@@ -25,6 +27,8 @@ class LoginViewModel : ViewModel() {
         }
     }
 
+
+
     private fun validateInputs(): Boolean {
         var isValid = true
 
@@ -33,9 +37,13 @@ class LoginViewModel : ViewModel() {
             errorEmail.set("Invalid Email")
 
             isValid = false
+            Log.e("email",isValid.toString())
 
         } else {
             errorEmail.set("")
+            Log.e("email invalid",isValid.toString())
+
+
         }
 
         if (password.get() == null || password.get()!!.length < 4) {
@@ -45,8 +53,13 @@ class LoginViewModel : ViewModel() {
 
         } else {
             errorPassword.set("")
+
         }
 
         return isValid
+    }
+
+    fun onEmailChange() {
+        validateInputs()
     }
 }

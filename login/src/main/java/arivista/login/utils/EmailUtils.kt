@@ -4,8 +4,7 @@ import java.util.regex.Pattern
 
 object EmailUtils {
     fun isEmailValid(email: String): Boolean {
-        val expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$"
-        val pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE)
+        val pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE)
         val matcher = pattern.matcher(email)
         return matcher.matches()
     }
