@@ -27,10 +27,13 @@ android {
     buildTypes {
         debug {
             buildConfigField('String', 'BASE_URL', '"http://192.168.1.24/"')
+            buildConfigField('String', 'googleWebClientId', '"1001282692527-nkhoo5ldn4142l8ijoi4c27qel9pu85o.apps.googleusercontent.com"')
 
         }
         release {
             buildConfigField('String', 'BASE_URL', '"http://192.168.1.24/"')
+            buildConfigField('String', 'googleWebClientId', '"1001282692527-nkhoo5ldn4142l8ijoi4c27qel9pu85o.apps.googleusercontent.com"')
+
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -100,9 +103,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 }
 
-android.buildTypes.debug.manifestPlaceholders = [
-        googleWebClientId: "1001282692527-nkhoo5ldn4142l8ijoi4c27qel9pu85o.apps.googleusercontent.com",
-]
 
 repositories {
     mavenCentral()

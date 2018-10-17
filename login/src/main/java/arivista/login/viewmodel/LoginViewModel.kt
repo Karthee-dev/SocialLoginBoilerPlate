@@ -84,6 +84,7 @@ class LoginViewModel : ViewModel() {
         SimpleAuth.connectGoogle(scopes, object : AuthCallback {
             override fun onSuccess(socialUser: SocialUser) {
                 Log.e("google", socialUser.email)
+                email.set(socialUser.email)
 //                ProfileActivity.start(this, GOOGLE, socialUser)
             }
 

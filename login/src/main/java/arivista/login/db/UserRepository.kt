@@ -5,7 +5,7 @@ import android.annotation.SuppressLint
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import arivista.login.MApplication
+import arivista.login.MyApplication
 import arivista.login.db.InsertAsyncTask
 import arivista.login.db.local.AddressDao
 import arivista.login.db.local.AppDatabase
@@ -21,7 +21,7 @@ import java.util.concurrent.Executors
 
 
 class UserRepository {
-    var appDatabase = AppDatabase.getAppDatabase(MApplication.context)
+    var appDatabase = AppDatabase.getAppDatabase(MyApplication.context)
      var addressDao: AddressDao = appDatabase.addressDao()
     private var executor: Executor = Executors.newSingleThreadExecutor()
 

@@ -13,17 +13,7 @@ class SocialUser : Parcelable {
     var email: String? = null
     var pageLink: String? = null
 
-    constructor() {}
-
-    constructor(other: SocialUser) {
-        this.userId = other.userId
-        this.accessToken = other.accessToken
-        this.profilePictureUrl = other.profilePictureUrl
-        this.username = other.username
-        this.fullName = other.fullName
-        this.email = other.email
-        this.pageLink = other.pageLink
-    }
+    constructor()
 
     override fun equals(o: Any?): Boolean {
         if (this === o) return true

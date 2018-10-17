@@ -7,7 +7,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.support.annotation.NonNull
 import android.text.TextUtils
-import arivista.login.R
+import arivista.login.BuildConfig
 import arivista.login.ui.SimpleAuthActivity
 import arivista.login.utils.*
 import com.google.android.gms.auth.GoogleAuthUtil
@@ -55,7 +55,7 @@ class GoogleAuthActivity : SimpleAuthActivity(), GoogleApiClient.OnConnectionFai
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val clientId = AppUtils.getMetaDataValue(this, getString(R.string.googleWebClientId))
+        val clientId = BuildConfig.googleWebClientId
 
         val gsoBuilder = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestId()

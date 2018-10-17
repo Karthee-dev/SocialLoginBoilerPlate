@@ -2,15 +2,13 @@ package arivista.login
 
 import android.app.Application
 import android.content.Context
-import arivista.login.utils.Initializer
 
-class MApplication : Application() {
+class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
         context = applicationContext
-        Initializer.context = context.applicationContext
 
     }
 
