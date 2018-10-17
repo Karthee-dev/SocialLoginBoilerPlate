@@ -2,6 +2,7 @@ package arivista.login
 
 import android.app.Application
 import android.content.Context
+import arivista.login.utils.Initializer
 
 class MApplication : Application() {
 
@@ -9,6 +10,8 @@ class MApplication : Application() {
         super.onCreate()
 
         context = applicationContext
+        Initializer.context = context.applicationContext
+
     }
 
     companion object {

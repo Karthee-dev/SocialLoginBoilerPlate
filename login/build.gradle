@@ -95,7 +95,15 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.14.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 }
+
+android.buildTypes.debug.manifestPlaceholders = [
+        googleWebClientId: "1001282692527-nkhoo5ldn4142l8ijoi4c27qel9pu85o.apps.googleusercontent.com",
+]
+
 repositories {
     mavenCentral()
 }

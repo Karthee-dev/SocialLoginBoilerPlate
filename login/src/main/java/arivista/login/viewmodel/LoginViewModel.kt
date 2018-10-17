@@ -5,7 +5,11 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import android.util.Log
 import arivista.login.db.remote.UserRepository
+import arivista.login.google.SimpleAuth
+import arivista.login.utils.AuthCallback
 import arivista.login.utils.EmailUtils
+import arivista.login.utils.SocialUser
+import java.util.*
 
 
 class LoginViewModel : ViewModel() {
@@ -28,7 +32,6 @@ class LoginViewModel : ViewModel() {
     }
 
 
-
     private fun validateInputs(): Boolean {
         var isValid = true
 
@@ -37,11 +40,11 @@ class LoginViewModel : ViewModel() {
             errorEmail.set("Invalid Email")
 
             isValid = false
-            Log.e("email",isValid.toString())
+            Log.e("email", isValid.toString())
 
         } else {
             errorEmail.set("")
-            Log.e("email invalid",isValid.toString())
+            Log.e("email invalid", isValid.toString())
 
 
         }
@@ -61,5 +64,42 @@ class LoginViewModel : ViewModel() {
 
     fun onEmailChange() {
         validateInputs()
+    }
+
+    fun connectFacebook() {
+        Log.e("cliicked", "fb")
+
+    }
+
+    fun connectInstagram() {
+
+    }
+
+    fun connectGoogle() {
+        val scopes = Arrays.asList(
+                "https://www.googleapis.com/auth/youtube",
+                "https://www.googleapis.com/auth/youtube.upload"
+        )
+
+        SimpleAuth.connectGoogle(scopes, object : AuthCallback {
+            override fun onSuccess(socialUser: SocialUser) {
+                Log.e("google", socialUser.email)
+//                ProfileActivity.start(this, GOOGLE, socialUser)
+            }
+
+            override fun onError(error: Throwable) {
+//                toast(error.message ?: "")
+                Log.e("google error", error.localizedMessage)
+
+            }
+
+            override fun onCancel() {
+//                toast("Canceled")
+            }
+        })
+    }
+
+    fun connectTwitter() {
+
     }
 }

@@ -57,6 +57,4 @@ class RegisterViewModel : ViewModel() {
             isSuccess.value = it
         }
     }
-
-
 }
